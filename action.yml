@@ -1,0 +1,27 @@
+# action.yml
+name: PerfAction for JMeter
+description: Run performance tests using JMeter test plan
+author: ""
+
+branding:
+  color: blue
+  icon: feather
+
+inputs:
+  test-plan-path:
+    required: true
+    description: jmeter test plan to execute
+  args:
+    required: false
+    description: ""
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - "-n"
+  - "-t"
+  - "${{ inputs.test-plan-path }}"
+  - "-l"
+  - "result.jtl"
+  - "${{ inputs.args }}"
